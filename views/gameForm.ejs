@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Iceland&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="/form.css">
+    <title><%= title %></title>
+</head>
+<body>
+    <%- include('./partials/navbar.ejs') %>
+    <form id="<%= `${button.toLowerCase()}-form` %>" method="POST" action="<%= action %>">
+        <div class="outer-container">
+            <h2>About Game</h2>
+            <div class="inner-content">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" placeholder="e.g. Hitman 2" value="<%= gameData.title || '' %>">
+                <label for="release-date">Release Date</label>
+                <input type="date" id="release-date" name="release_date" value="<%= publisherData.founding_date ? new Date(publisherData.founding_date).toLocaleDateString('en-CA').split('T')[0] : '' %>">
+                <label for="description">Description</label>
+                <textarea id="description" class="description" name="description" placeholder="Enter a brief about the game..."><%= gameData.description || '' %></textarea>
+            </div>
+        </div>
+        <div class="outer-container">
+            <h2>Genre</h2>
+            <select name="genre_name">
+                <option value="Action-Adventure" <%= gameData.genre_name === 'Action-Adventure' ? 'selected' : '' %>>Action-Adventure</option>
+                <option value="RPG" <%= gameData.genre_name === 'RPG' ? 'selected' : '' %>>RPG</option>
+                <option value="Shooter" <%= gameData.genre_name === 'Shooter' ? 'selected' : '' %>>Shooter</option>
+                <option value="Sports" <%= gameData.genre_name === 'Sports' ? 'selected' : '' %>>Sports</option>
+            </select>
+        </div>
+        <div class="outer-container">
+            <h2>About Publisher</h2>
+            <div class="inner-content">
+                <label for="publisher-name">Publisher Name</label>
+                <input type="text" id="publisher-name" name="publisher_name" placeholder="e.g. Sony Interactive Entertainment" value="<%= publisherData.company_name || '' %>">
+                <label for="founding-date">Founding Date</label>
+                <input type="date" id="founding-date" name="founding_date" value="<%= publisherData.founding_date ? new Date(publisherData.founding_date).toLocaleDateString('en-CA').split('T')[0] : '' %>">
+                <label for="headquarters">HeadQuarters</label>
+                <input type="text" id="headquarters" name="headquarters" placeholder="City, Country" value="<%= publisherData.headquarters || '' %>">
+            </div>
+        </div>
+        <div class="outer-container">
+            <h2>Platform</h2>
+            <div class="platform-group">
+                <div class="checkbox-row">
+                    <input type="checkbox" id="platform-1" name="platform_name" value="Nintendo Switch" <%= platformsArr.includes('Nintendo Switch') ? 'checked' : '' %>>
+                    <label for="platform-1">Nintendo Switch</label>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="platform-2" name="platform_name" value="PC" <%= platformsArr.includes('PC') ? 'checked' : '' %>>
+                    <label for="platform-2">PC</label>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="platform-3" name="platform_name" value="PlayStation 5" <%= platformsArr.includes('PlayStation 5') ? 'checked' : '' %>>
+                    <label for="platform-3">PlayStation 5</label>
+                </div>
+                <div class="checkbox-row">
+                    <input type="checkbox" id="platform-4" name="platform_name" value="Xbox Series X/S" <%= platformsArr.includes('Xbox Series X/S') ? 'checked' : '' %>>
+                    <label for="platform-4">Xbox Series X/S</label>
+                </div>
+            </div>
+        </div>
+        <button type="<%= button === 'Update' ? 'button' : 'submit' %>" id="<%= `${button.toLowerCase()}-btn` %>"><%= button %></button>
+    </form>
+    <% if (button === 'Update') { %>
+        <dialog id="password-modal" class="password-modal">
+            <h3>Admin Confirmation Required</h3>
+            <p>please enter the admin password to complete your action</p>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" form="update-form" required>
+            <div class="modal-actions">
+                <button type="button" id="cancel-btn">&times;</button>
+                <button type="submit" form="update-form">Confirm</button>
+            </div>
+        </dialog>
+        <script src="/actionConfirmation.js"></script>
+    <% } %>
+</body>
+</html>

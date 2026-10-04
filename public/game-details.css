@@ -1,0 +1,278 @@
+.game-details-body {
+    position: relative;
+    margin: 0;
+    background-color: #3f3f3f;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    height: 100vh;
+    box-sizing: border-box;
+    padding-top: 75px;
+}
+
+.game-details-body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to top, var(--color1), var(--color2)), #525252;
+    background-blend-mode: multiply;
+    opacity: 0;
+    transition: opacity 3s ease-in-out;
+}
+
+.game-details-body.palette-loaded::before {
+    opacity: 1;
+}
+
+.game-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: 65% 0%;
+    opacity: 60%;
+    mask-image: linear-gradient(20deg, transparent 30%, black 70%);
+}
+
+.game-container {
+    position: relative;
+    top: 20vh;
+    margin-left: 40px;
+    padding: 35px;
+}
+
+.game-title {
+    margin: 0;
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.game-genre {
+    display: inline-block;
+    color: white;
+    width: fit-content;
+    font-family: "Iceland", sans-serif;
+    font-weight: 700;
+    border-radius: 30px;
+    padding: 8px;
+    margin: 16px 0px 20px 10px;
+}
+
+.shooter {
+    background-color: #E77023;
+    transition: box-shadow 0.5s ease;
+}
+
+.shooter:hover {
+    box-shadow: 0px 3px 15px -7px rgb(255, 166, 77);
+}
+
+.action-adventure {
+    background-color: #0496FC;
+    transition: box-shadow 0.5s ease;
+}
+
+.action-adventure:hover {
+    box-shadow: 0px 3px 20px -7px rgb(113, 194, 255);
+}
+
+.rpg {
+    background-color: #F73028;
+    transition: box-shadow 0.5s ease;
+}
+
+.rpg:hover {
+    box-shadow: 0px 3px 15px -7px rgb(252, 97, 91); 
+}
+
+.sports {
+    background-color: #2FD9D4;
+    transition: box-shadow 0.5s ease;
+}
+
+.sports:hover {
+    box-shadow: 0px 3px 15px -7px rgb(110, 250, 246);
+}
+
+.game-description {
+    position: relative;
+    background-color: rgba(22, 23, 17, 0.5);
+    width: fit-content;
+    padding: 20px;
+    border: 1px solid #B4C9EA;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px -5px #cfe7f8;
+}
+
+.options {
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+    z-index: 4;
+    top: 27vh;
+    width: 42%;
+    align-items: center;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.update-btn {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    background-color: #0a64b9;
+    border-radius: 36px;
+    padding: 16px;
+    font-size: 15px;
+    transition: background-color 0.2s ease, text-shadow 0.2s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.update-btn:hover {
+    text-shadow: 0px 0px 10px rgb(255, 255, 255);
+    background-color: #053a6b;
+}
+
+.delete-btn {
+    display: inline-flex;
+    align-items: center;
+    color: white;
+    background-color: #cb2424;
+    border-radius: 36px;
+    padding: 16px;
+    font-size: 15px;
+    transition: background-color 0.2s ease, text-shadow 0.2s ease;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    text-shadow: 0px 0px 10px rgb(255, 255, 255);
+    background-color: #6f1414;
+}
+
+.availability {
+    position: relative;
+    text-align: center;
+    z-index: 3;
+    top: 35vh;
+}
+
+.availability-menu {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+    width: 20%;
+    top: 35vh;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+@keyframes modalSlideUp  {
+    0% {
+        opacity: 0;
+        transform: translateY(70px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes backdropFadeUp {
+    0% {
+        background-color: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(0px);
+    }
+    100% {
+        background-color: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(3px);
+    }
+}
+
+.password-modal[open] {
+    animation: modalSlideUp 0.4s ease-out;
+    position: relative;
+    background: rgba(39, 34, 31, 0.7);
+    border: 2px solid #ff4c4c;
+    border-radius: 16px;
+    padding: 16px 32px;
+    box-shadow: 0px 3px 10px -3px rgb(255, 88, 88);
+    color: white;
+}
+
+.password-modal[open]::backdrop {
+    animation: backdropFadeUp 0.4s ease-out;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(3px);
+}
+
+
+.password-modal h3 {
+    margin-bottom: 6px;
+}
+
+.password-modal p {
+    font-size: 14px;
+    margin-top: 0;
+    color: rgb(197, 197, 197);
+}
+
+.password-modal label {
+    font-weight: 600;
+}
+
+.password-modal input {
+    display: block;
+    padding: 4px 8px;
+    width: 70%;
+    border-radius: 9px;
+    margin-top: 4px;
+    margin-bottom: 12px;
+    outline: none;
+    border: 2px solid coral;
+    background: #feebcf;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+}
+
+.password-modal button[type="submit"] {
+    background-color: #3eb33e;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 16px;
+    color: white;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.password-modal button[type="submit"]:hover {
+    background-color: #187618;
+}
+
+.password-modal button[type="button"] {
+    background-color: #ff9292;
+    border: 1.5px solid red;
+    border-radius: 5px;
+    position: absolute;
+    top: 7px;
+    right: 9px;
+    cursor: pointer;
+    color: #a00;
+    transition: background-color 0.2s ease;
+}
+
+.password-modal button[type="button"]:hover {
+    background-color: #ff6565;
+}

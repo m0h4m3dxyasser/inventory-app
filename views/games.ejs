@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Iceland&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="/games.css">
+    <title><%= title %></title>
+</head>
+<body>
+    <%- include('./partials/navbar.ejs') %>
+    <div class="container">
+        <div class="categories-container">
+            <h2>Category</h2>
+            <a href="/categories/action-adventure" class="category-link action-adventure">Action-Adventure</a>
+            <a href="/categories/rpg" class="category-link rpg">RPG</a>
+            <a href="/categories/shooter" class="category-link shooter">Shooter</a>
+            <a href="/categories/sports" class="category-link sports">Sports</a>
+        </div>
+        <div class="games-container">
+            <h2>Catalog</h2>
+            <% games.forEach(game => { %>
+                <a href="/games/<%= game.id %>" class="game-card-link">
+                    <div class="game-card">
+                        <p class="game-title"><%= game.title %></p>
+                        <p class="game-description"><%= game.description %></p>
+                        <img src="<%= game.image_url %>" alt="<%= game.title %>" class="game-card-bg-img">
+                    </div>
+                </a>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>

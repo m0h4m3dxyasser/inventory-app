@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Iceland&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="/categories.css">
+    <title><%= title %></title>
+</head>
+<body class="games-list-body">
+    <%- include('./partials/navbar.ejs') %>
+    <div class="main-ui">
+        <h2><%= category %> Category</h2>
+        <% if (games && games.length > 0) { %>
+            <div class="games-container">
+                <% games.forEach(game => { %>
+                    <a href="/games/<%= game.id %>" class="game-card-link">
+                        <div class="game-card">
+                            <p class="game-title"><%= game.title %></p>
+                            <p class="game-description"><%= game.description %></p>
+                            <img src="<%= game.image_url %>" alt="<%= game.title %>" class="game-card-bg-img">
+                        </div>
+                    </a>
+                <% }); %>
+            </div>
+            <form id="delete-category-form" method="POST" action="/categories/<%= games[0].genre_name.toLowerCase() %>/delete">
+                <button type="button" id="delete-category-btn" class="delete-btn">Delete Category</button>
+            </form>
+        </div>
+        <dialog id="password-modal" class="password-modal">
+            <h3>Admin Confirmation Required</h3>
+            <p>please enter the admin password to complete your action</p>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" form="delete-category-form" required>        
+            <div class="modal-actions">
+                <button type="button" id="cancel-btn">&times;</button>
+                <button type="submit" form="delete-category-form">Confirm</button>
+            </div>
+        </dialog>
+        <script src="/actionConfirmation.js"></script>
+    <% } %>
+</body>
+</html>
