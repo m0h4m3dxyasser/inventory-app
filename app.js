@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const indexRouter = require('./routes/IndexRouter');
+const indexRouter = require('./routes/indexRouter');
 const gamesRouter = require('./routes/gamesRouter');
 const categoriesRouter = require('./routes/categoriesRouter');
 const { handle404, handleError } = require('./controllers/errorController');
